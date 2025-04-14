@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nas/core/constant/theme.dart';
-import 'package:nas/view/screeen/Auth/forgetPassword/change_password.dart';
-import 'package:nas/view/screeen/Auth/forgetPassword/code_validate.dart';
-import 'package:nas/view/screeen/Auth/login.dart';
+import 'package:nas/view/screen/Auth/forgetPassword/change_password.dart';
+import 'package:nas/view/screen/Auth/forgetPassword/code_validate.dart';
+import 'package:nas/view/screen/Auth/login.dart';
 
 class ForgetPasswordController extends GetxController {
   // Form key for validation

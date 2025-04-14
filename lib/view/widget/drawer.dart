@@ -3,12 +3,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:nas/core/constant/theme.dart';
 import 'package:nas/core/constant/url.dart';
-import 'package:nas/view/screeen/Auth/login.dart';
-import 'package:nas/view/screeen/main/drawer/change_password.dart';
-import 'package:nas/view/screeen/main/drawer/change_wallet_number.dart';
-import 'package:nas/view/screeen/main/drawer/edit_phone_number.dart';
-import 'package:nas/view/screeen/main/drawer/job_selection_screen.dart';
-import 'package:nas/view/screeen/main/drawer/modify_working_hours.dart';
+import 'package:nas/view/screen/Auth/login.dart';
+import 'package:nas/view/screen/main/drawer/change_password.dart';
+import 'package:nas/view/screen/main/drawer/change_wallet_number.dart';
+import 'package:nas/view/screen/main/drawer/edit_phone_number.dart';
+import 'package:nas/view/screen/main/drawer/job_selection_screen.dart';
+import 'package:nas/view/screen/main/drawer/modify_working_hours.dart';
 import 'package:nas/view/widget/button_border.dart';
 
 Drawer drawer(controller) {
@@ -321,7 +321,7 @@ void showDeleteDialog() {
   Get.dialog(
     Dialog(
       // Add margin to the entire Dialog
-      insetPadding: EdgeInsets.symmetric(horizontal: 68),
+      insetPadding: EdgeInsets.symmetric(horizontal: 30),
       child: Container(
         padding: EdgeInsets.only(left: 16, right: 16, top: 18, bottom: 26),
         child: Column(

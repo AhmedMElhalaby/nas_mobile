@@ -4,7 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:nas/core/connection_service/app_binding/initial_binding.dart';
 import 'package:nas/core/constant/theme.dart';
-import 'package:nas/view/screeen/splach_screen.dart';
+import 'package:nas/view/screen/splach_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

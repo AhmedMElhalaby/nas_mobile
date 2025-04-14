@@ -11,17 +11,17 @@ import 'package:nas/controller/registration/page_ten_controller.dart';
 import 'package:nas/controller/registration/page_three_controller.dart';
 import 'package:nas/controller/registration/page_two_controller.dart';
 import 'package:nas/core/constant/theme.dart';
-import 'package:nas/view/screeen/Auth/login.dart';
-import 'package:nas/view/screeen/Auth/registration/page_eight.dart';
-import 'package:nas/view/screeen/Auth/registration/page_five.dart';
-import 'package:nas/view/screeen/Auth/registration/page_four.dart';
-import 'package:nas/view/screeen/Auth/registration/page_nine.dart';
-import 'package:nas/view/screeen/Auth/registration/page_one.dart';
-import 'package:nas/view/screeen/Auth/registration/page_seven.dart';
-import 'package:nas/view/screeen/Auth/registration/page_six.dart';
-import 'package:nas/view/screeen/Auth/registration/page_ten.dart';
-import 'package:nas/view/screeen/Auth/registration/page_three.dart';
-import 'package:nas/view/screeen/Auth/registration/page_two.dart';
+import 'package:nas/view/screen/Auth/login.dart';
+import 'package:nas/view/screen/Auth/registration/page_eight.dart';
+import 'package:nas/view/screen/Auth/registration/page_five.dart';
+import 'package:nas/view/screen/Auth/registration/page_four.dart';
+import 'package:nas/view/screen/Auth/registration/page_nine.dart';
+import 'package:nas/view/screen/Auth/registration/page_one.dart';
+import 'package:nas/view/screen/Auth/registration/page_seven.dart';
+import 'package:nas/view/screen/Auth/registration/page_six.dart';
+import 'package:nas/view/screen/Auth/registration/page_ten.dart';
+import 'package:nas/view/screen/Auth/registration/page_three.dart';
+import 'package:nas/view/screen/Auth/registration/page_two.dart';
 import 'package:nas/view/widget/button_border.dart';
 
 class WorkerRegistrationController extends GetxController {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nas/view/screeen/main/approvals_screen.dart';
-import 'package:nas/view/screeen/main/new_screen.dart';
-import 'package:nas/view/screeen/main/violations_screen.dart';
-import 'package:nas/view/screeen/main/waiting_screen.dart';
+import 'package:nas/view/screen/main/approvals_screen.dart';
+import 'package:nas/view/screen/main/new_screen.dart';
+import 'package:nas/view/screen/main/violations_screen.dart';
+import 'package:nas/view/screen/main/waiting_screen.dart';
 
 class MainHomeController extends GetxController
     with GetTickerProviderStateMixin {

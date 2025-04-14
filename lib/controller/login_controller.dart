@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nas/core/constant/theme.dart';
-import 'package:nas/view/screeen/Auth/forgetPassword/forget_password.dart';
-import 'package:nas/view/screeen/Auth/worker_registration_screen.dart';
-import 'package:nas/view/screeen/main/main_home_screen.dart';
+import 'package:nas/view/screen/Auth/forgetPassword/forget_password.dart';
+import 'package:nas/view/screen/Auth/worker_registration_screen.dart';
+import 'package:nas/view/screen/main/main_home_screen.dart';
 import 'package:nas/view/widget/button_border.dart';
 import 'package:nas/view/widget/primary_button.dart';
 
@@ -31,7 +31,8 @@ class LoginController extends GetxController {
     try {
       Get.focusScope!.unfocus(); // Close the keyboard
 
-      if (formstate.currentState!.validate()) {
+      if (formstate.currentState != null &&
+          formstate.currentState!.validate()) {
         // Simulate API call or authentication logic
         print('Login successful');
         Get.offAll(() => MainHomeScreen());
@@ -89,15 +90,15 @@ class LoginController extends GetxController {
 
   // Focus management for better user experience
   void handleFocusTransition(FocusNode currentFocus, FocusNode nextFocus) {
-    currentFocus.unfocus();
-    nextFocus.requestFocus();
+    if (currentFocus.hasFocus) currentFocus.unfocus();
+    if (nextFocus.canRequestFocus) nextFocus.requestFocus();
   }
 
   void needHelpDialog() {
     Get.dialog(
       Dialog(
         // Add margin to the entire Dialog
-        insetPadding: EdgeInsets.symmetric(horizontal: 40),
+        insetPadding: EdgeInsets.symmetric(horizontal: 30),
 
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
@@ -122,21 +123,21 @@ class LoginController extends GetxController {
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(
                         color: AppTheme.primaryColor,
-                        width: 1,
+                        width: 2,
                       ),
                     ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(
                         color: AppTheme.primaryColor,
-                        width: 1,
+                        width: 2,
                       ),
                     ),
                     focusedBorder: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(10),
                       borderSide: BorderSide(
                         color: AppTheme.primaryColor,
-                        width: 1,
+                        width: 2,
                       ),
                     ),
                     contentPadding: EdgeInsets.symmetric(

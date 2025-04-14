@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nas/core/constant/theme.dart';
 import 'package:nas/core/constant/url.dart';
-import 'package:nas/view/widget/tool_tip_widget.dart';
 
 class CustomCheckbox extends StatelessWidget {
   final String? title;
@@ -13,6 +12,7 @@ class CustomCheckbox extends StatelessWidget {
   final bool icon;
   final double? width;
   final VoidCallback onChanged;
+  final VoidCallback? onIconTap;
   final isCircle;
   final textStyle;
   final mainAxisAlignment;
@@ -36,6 +36,7 @@ class CustomCheckbox extends StatelessWidget {
     this.crossAxisAlignment,
     this.padding,
     this.message,
+    this.onIconTap,
   });
 
   @override
@@ -95,9 +96,14 @@ class CustomCheckbox extends StatelessWidget {
             if (widget != null) widget!,
             // Icon
             if (icon)
-              ToolTipIcon(
-                message: "طبيعة العمل تكون في المطبخ حيث تعمل مع الشيف",
-                imagePath: "${AppUrl.rootImages}/vector1.png",
+              GestureDetector(
+                onTap: onIconTap,
+                child: Image.asset(
+                  "${AppUrl.rootImages}/vector1.png",
+                  height: 16,
+                  width: 16,
+                  fit: BoxFit.scaleDown,
+                ),
               ),
           ],
         ),

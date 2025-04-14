@@ -49,7 +49,7 @@ class ViolationsScreenController extends GetxController {
     Get.dialog(
       Dialog(
         // Add margin to the entire Dialog
-        insetPadding: EdgeInsets.symmetric(horizontal: 54),
+        insetPadding: EdgeInsets.symmetric(horizontal: 30),
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(

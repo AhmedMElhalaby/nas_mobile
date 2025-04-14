@@ -58,7 +58,7 @@ class WaitingScreenController extends GetxController {
           Dialog(
             shadowColor: AppTheme.backgroundTransparent,
             // Add margin to the entire Dialog
-            insetPadding: EdgeInsets.symmetric(horizontal: 54),
+            insetPadding: EdgeInsets.symmetric(horizontal: 30),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: Container(
@@ -84,7 +84,7 @@ class WaitingScreenController extends GetxController {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         ButtonBorder(
-                        height: Get.height * 0.04,
+                          height: Get.height * 0.04,
                           borderRadius: 10,
                           onTap: () {
                             pendingRequests.removeAt(index);
@@ -100,7 +100,7 @@ class WaitingScreenController extends GetxController {
                         ),
                         SizedBox(width: 30),
                         ButtonBorder(
-                        height: Get.height * 0.04,
+                          height: Get.height * 0.04,
                           borderRadius: 10,
                           onTap: () => Get.back(),
                           text: "إغلاق",

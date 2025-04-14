@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nas/core/constant/theme.dart';
 import 'package:nas/data/model/job_request.dart';
-import 'package:nas/view/screeen/main/location.dart';
+import 'package:nas/view/screen/main/location.dart';
 import 'package:nas/view/widget/button_border.dart';
 
 class ApprovalsScreenController extends GetxController {
@@ -74,7 +74,7 @@ class ApprovalsScreenController extends GetxController {
           Dialog(
             shadowColor: AppTheme.backgroundTransparent,
             // Add margin to the entire Dialog
-            insetPadding: EdgeInsets.symmetric(horizontal: 54),
+            insetPadding: EdgeInsets.symmetric(horizontal: 30),
             child: Container(
               padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
               child: Column(

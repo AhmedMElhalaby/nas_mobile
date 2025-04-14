@@ -1,13 +1,14 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nas/view/screeen/Auth/login.dart';
+import 'package:nas/view/screen/Auth/login.dart';
 
 class SplashController extends GetxController {
   @override
   void onInit() {
-    Future.delayed(const Duration(seconds: 5), () {
-      Get.offAll(
-        () => LoginScreen(),
-      ); // This will remove the splash screen and navigate to HomeScreen
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      Future.delayed(const Duration(seconds: 4), () {
+        Get.offAll(() => LoginScreen());
+      });
     });
     super.onInit();
   }
