@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:nas/controller/registration/custom_bottom_sheet.dart';
 import 'package:nas/core/constant/theme.dart';
 import 'package:nas/view/widget/custom_snackbar.dart';
-import 'package:url_launcher/url_launcher.dart';
 
 class PageTenController extends GetxController {
   // قائمة الشروط
