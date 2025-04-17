@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:nas/core/constant/theme.dart';
 import 'package:nas/core/constant/url.dart';
+import 'package:nas/view/widget/custom_snackbar.dart';
 
 // ignore: must_be_immutable
 class TextFormFiledWidget extends StatefulWidget {
@@ -197,13 +198,7 @@ class _TextFormFiledWidgetState extends State<TextFormFiledWidget> {
 
 String? _defaultValidator(String? value) {
   if (value == null || value.isEmpty) {
-    Get.snackbar(
-      'خطأ',
-      'يرجى إكمال جميع الحقول المطلوبة',
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.red,
-      colorText: Colors.white,
-    );
+    showErrorSnackbar(message: 'يرجى إكمال جميع الحقول المطلوبة');
     return 'هذا الحقل مطلوب';
   }
   return null;

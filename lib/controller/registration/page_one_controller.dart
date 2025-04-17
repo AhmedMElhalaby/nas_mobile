@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nas/view/widget/custom_snackbar.dart';
 
 class PageOneController extends GetxController {
   final sources = [
@@ -32,21 +33,6 @@ class PageOneController extends GetxController {
         .clear(); // Clear "Other" input when a predefined source is selected
   }
 
-  void complete() {
-    final source =
-        isOtherSelected.value
-            ? otherSourceController.text
-            : selectedSource.value;
-
-    if (source.isNotEmpty) {
-      Get.snackbar(
-        'تم الانتهاء',
-        'تم اختيار المصدر: $source',
-        snackPosition: SnackPosition.TOP,
-      );
-    }
-  }
-
   void selectOther() {
     selectedSource.value = '';
     isOtherSelected.value = true;
@@ -76,13 +62,7 @@ class PageOneController extends GetxController {
 
     if (source.isEmpty) {
       if (showSnackbar) {
-        Get.snackbar(
-          'تنبيه',
-          'الرجاء اختيار مصدر',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.amber,
-          colorText: Colors.black,
-        );
+        showInfoSnackbar(message: 'الرجاء اختيار مصدر');
       }
       return false;
     }

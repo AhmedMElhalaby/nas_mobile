@@ -6,6 +6,7 @@ import 'package:nas/core/constant/theme.dart';
 import 'package:nas/data/model/job_request.dart';
 import 'package:nas/view/screen/main/location.dart';
 import 'package:nas/view/widget/button_border.dart';
+import 'package:nas/view/widget/custom_snackbar.dart';
 
 class ApprovalsScreenController extends GetxController {
   var approvalsList = <JobRequest>[].obs;
@@ -53,10 +54,9 @@ class ApprovalsScreenController extends GetxController {
     // Implement approval logic
     Get.to(() => const Location()); // إذا كنتِ تستخدمين GetX
 
-    Get.snackbar(
-      'تمت الموافقة',
-      'تمت الموافقة على الطلب بنجاح',
-      snackPosition: SnackPosition.BOTTOM,
+    showSuccessSnackbar(
+      title: 'تمت الموافقة',
+      message: 'تمت الموافقة على الطلب بنجاح',
     );
     // removeRequest(index);
   }
@@ -97,11 +97,7 @@ class ApprovalsScreenController extends GetxController {
                         onTap: () {
                           approvalsList.removeAt(index);
                           Get.back();
-                          Get.snackbar(
-                            'تم الإلغاء',
-                            'تم إلغاء الطلب بنجاح',
-                            snackPosition: SnackPosition.BOTTOM,
-                          );
+                          showSuccessSnackbar(message: 'تم إلغاء الطلب بنجاح');
                         },
                         text: 'تأكيد',
                         color: AppTheme.red,

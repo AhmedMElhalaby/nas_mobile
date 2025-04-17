@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:nas/core/constant/theme.dart';
 import 'package:nas/data/model/job_request.dart';
 import 'package:nas/view/widget/button_border.dart';
+import 'package:nas/view/widget/custom_snackbar.dart';
 
 class WaitingScreenController extends GetxController {
   var pendingRequests = <JobRequest>[].obs;
@@ -89,10 +90,8 @@ class WaitingScreenController extends GetxController {
                           onTap: () {
                             pendingRequests.removeAt(index);
                             Get.back();
-                            Get.snackbar(
-                              'تم الإلغاء',
-                              'تم إلغاء الطلب بنجاح',
-                              snackPosition: SnackPosition.BOTTOM,
+                            showSuccessSnackbar(
+                              message: 'تم إلغاء الطلب بنجاح',
                             );
                           },
                           text: 'تأكيد',

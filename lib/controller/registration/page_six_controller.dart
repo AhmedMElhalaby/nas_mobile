@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nas/view/widget/custom_snackbar.dart';
 
 class PageSixController extends GetxController {
   final formKey = GlobalKey<FormState>();
@@ -22,17 +23,6 @@ class PageSixController extends GetxController {
     locationController.text = address;
   }
 
-  void submitForm() {
-    if (formKey.currentState!.validate()) {
-      // Process form submission
-      Get.snackbar(
-        'نجاح',
-        'تم تسجيل المعلومات بنجاح',
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }
-  }
-
   Map<String, dynamic> getFormData() {
     return {
       'governorate': governorateController.text,
@@ -51,13 +41,7 @@ class PageSixController extends GetxController {
         nationalIdController.text.isEmpty ||
         selectedGender.value.isEmpty) {
       if (showSnackbar) {
-        Get.snackbar(
-          'تنبيه',
-          'الرجاء إكمال جميع الحقول المطلوبة',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.amber,
-          colorText: Colors.black,
-        );
+        showInfoSnackbar(message: 'الرجاء إكمال جميع الحقول المطلوبة');
       }
       return false;
     }

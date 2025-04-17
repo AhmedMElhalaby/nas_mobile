@@ -4,6 +4,7 @@ import 'package:nas/core/constant/theme.dart';
 import 'package:nas/view/screen/Auth/forgetPassword/change_password.dart';
 import 'package:nas/view/screen/Auth/forgetPassword/code_validate.dart';
 import 'package:nas/view/screen/Auth/login.dart';
+import 'package:nas/view/widget/custom_snackbar.dart';
 
 class ForgetPasswordController extends GetxController {
   // Form key for validation
@@ -37,21 +38,10 @@ class ForgetPasswordController extends GetxController {
     if (validatePhoneNumber(phoneController.text)) {
       // Simulate sending code
       print('Code sent to ${phoneController.text}');
-      Get.snackbar(
-        'Success',
-        'Code sent successfully',
-        backgroundColor: Colors.green,
-
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      showSuccessSnackbar(message: 'الرمز تم إرساله بنجاح');
       Get.to(() => CodeValidate());
     } else {
-      Get.snackbar(
-        'Error',
-        'Invalid phone number',
-        backgroundColor: AppTheme.red,
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      showErrorSnackbar(message: 'يرجى إدخال رقم هاتف صحيح');
     }
   }
 
@@ -65,11 +55,7 @@ class ForgetPasswordController extends GetxController {
     if (otpCode.value.isNotEmpty) {
       Get.to(() => ChangeToNewPassword());
     } else {
-      Get.snackbar(
-        'Error',
-        'Please enter a valid OTP code',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      showErrorSnackbar(message: 'يرجى إدخال الرمز الصحيح');
     }
   }
 
@@ -80,56 +66,20 @@ class ForgetPasswordController extends GetxController {
     final confirmPassword = confirmPasswordController.text.trim();
     print("password $password, confirmPassword $confirmPassword");
     if (password.isEmpty || confirmPassword.isEmpty) {
-      Get.snackbar(
-        "خطأ",
-        "يرجى إدخال كلمة المرور وتأكيدها",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      showErrorSnackbar(message: "يرجى إدخال كلمة المرور وتأكيدها");
       return;
     }
 
     if (password != confirmPassword) {
-      Get.snackbar(
-        "خطأ",
-        "كلمتا المرور غير متطابقتين",
-        snackPosition: SnackPosition.BOTTOM,
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
+      showErrorSnackbar(message: "كلمتا المرور غير متطابقتين");
       return;
     }
 
     // Simulate a successful password update
-    Get.snackbar(
-      "نجاح",
-      "تم تحديث كلمة المرور بنجاح",
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.green,
-      colorText: Colors.white,
-    );
+    showSuccessSnackbar(message: "تم تحديث كلمة المرور بنجاح");
 
     // Navigate to the login screen or another screen
     Get.off(() => LoginScreen()); // Replace '/login' with your login route
-  }
-
-  void changePassword() {
-    if (passwordController.text == confirmPasswordController.text) {
-      // Logic to change password
-      print("Password changed successfully");
-      Get.snackbar(
-        'Success',
-        'Password changed successfully',
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    } else {
-      Get.snackbar(
-        'Error',
-        'Passwords do not match',
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }
   }
 
   @override

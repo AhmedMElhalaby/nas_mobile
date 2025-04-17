@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nas/view/widget/custom_snackbar.dart';
 
 class PageNineController extends GetxController {
   // First Contact Person
@@ -42,16 +43,6 @@ class PageNineController extends GetxController {
     }
   }
 
-  void validateAndProceed() {
-    // Add validation logic
-    if (_validateContactInfo()) {
-      // Proceed to next screen or submit data
-      Get.snackbar('نجاح', 'تم حفظ معلومات جهات الاتصال');
-    } else {
-      Get.snackbar('خطأ', 'يرجى إدخال جميع المعلومات المطلوبة');
-    }
-  }
-
   bool _validateContactInfo() {
     return firstNameController.text.isNotEmpty &&
         firstRelationType.value.isNotEmpty &&
@@ -82,12 +73,8 @@ class PageNineController extends GetxController {
   bool validate({bool showSnackbar = true}) {
     if (!_validateContactInfo()) {
       if (showSnackbar) {
-        Get.snackbar(
-          'تنبيه',
-          'الرجاء إدخال معلومات جهات الاتصال بشكل كامل',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.amber,
-          colorText: Colors.black,
+        showInfoSnackbar(
+          message: 'الرجاء إدخال معلومات جهات الاتصال بشكل كامل',
         );
       }
       return false;

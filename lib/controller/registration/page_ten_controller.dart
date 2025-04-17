@@ -1,7 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nas/controller/registration/custom_bottom_sheet.dart';
 import 'package:nas/core/constant/theme.dart';
+import 'package:nas/view/widget/custom_snackbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PageTenController extends GetxController {
@@ -19,7 +21,7 @@ class PageTenController extends GetxController {
 
   RxList<bool> selectedTerms = <bool>[].obs;
   // Get underlined text spans for specific terms
-  List<TextSpan> getUnderlinedTextSpans(String text) {
+  List<TextSpan> getUnderlinedTextSpans(String text, int index) {
     Map<String, String> underlinedParts = {
       'أوافق على شروط وقواعد العمل': 'شروط وقواعد العمل',
       'أوافق على قواعد السلوك المهني والأخلاقي':
@@ -41,12 +43,17 @@ class PageTenController extends GetxController {
           recognizer:
               TapGestureRecognizer()
                 ..onTap = () async {
-                  final Uri url = Uri.parse("https://www.google.com");
-                  if (await canLaunchUrl(url)) {
-                    await launchUrl(url, mode: LaunchMode.externalApplication);
-                  } else {
-                    throw "Could not launch $url";
-                  }
+                  Get.bottomSheet(
+                    CustomBottomSheet(
+                      title: underlinedParts[text] ?? '',
+                      documentType: text,
+                      termIndex: index, // ⬅️ نمرر الفهرس هنا
+                    ),
+                    isScrollControlled: true,
+                    backgroundColor: Colors.transparent,
+                    elevation: 0,
+                    enableDrag: true,
+                  );
                 },
         ),
       ];
@@ -79,27 +86,6 @@ class PageTenController extends GetxController {
   // التحقق من الموافقة على جميع الشروط
   bool get areAllTermsAccepted => selectedTerms.every((accepted) => accepted);
 
-  // إرسال الموافقة على الشروط
-  void submitTerms() {
-    if (areAllTermsAccepted) {
-      Get.snackbar(
-        'تأكيد',
-        'تم قبول جميع الشروط والأحكام',
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-      );
-      // الانتقال إلى الشاشة التالية أو تنفيذ الإجراء المطلوب
-      // Get.to(() => NextScreen());
-    } else {
-      Get.snackbar(
-        'تحذير',
-        'يرجى الموافقة على جميع الشروط والأحكام',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
-    }
-  }
-
   Map<String, dynamic> getFormData() {
     Map<String, bool> acceptedTerms = {};
     for (int i = 0; i < terms.length; i++) {
@@ -115,13 +101,7 @@ class PageTenController extends GetxController {
   bool validate({bool showSnackbar = true}) {
     if (!areAllTermsAccepted) {
       if (showSnackbar) {
-        Get.snackbar(
-          'تنبيه',
-          'الرجاء الموافقة على جميع الشروط والأحكام',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.amber,
-          colorText: Colors.black,
-        );
+        showInfoSnackbar(message: 'الرجاء الموافقة على جميع الشروط والأحكام');
       }
       return false;
     }

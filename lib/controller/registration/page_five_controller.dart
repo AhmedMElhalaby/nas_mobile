@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nas/view/widget/custom_snackbar.dart';
 
 class PageFiveController extends GetxController {
   // Form key for validation
@@ -112,12 +113,8 @@ class PageFiveController extends GetxController {
         familyNameController.text.isEmpty ||
         selectedDate.value == null) {
       if (showSnackbar) {
-        Get.snackbar(
-          'تنبيه',
-          'الرجاء إكمال جميع حقول الاسم وتاريخ الميلاد',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.amber,
-          colorText: Colors.black,
+        showInfoSnackbar(
+          message: 'الرجاء إكمال جميع حقول الاسم وتاريخ الميلاد',
         );
       }
       return false;

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:nas/view/widget/custom_snackbar.dart';
 
 class PageEightController extends GetxController {
   final RxString selectedFrontIDImage = 'c'.obs;
@@ -37,7 +38,7 @@ class PageEightController extends GetxController {
       return pickedFile
           ?.path; // Return the image path or null if no image is selected
     } catch (e) {
-      Get.snackbar('Error', 'Failed to pick image');
+      showErrorSnackbar(message: 'فشل في اختيار الصورة');
       return null;
     }
   }
@@ -75,24 +76,12 @@ class PageEightController extends GetxController {
       final String? pickedImagePath = await pickImage();
       if (pickedImagePath != null) {
         selectedFrontIDImage.value = pickedImagePath;
-        Get.snackbar(
-          'نجاح',
-          'تم اختيار صورة الهوية الأمامية بنجاح',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-        );
+        showSuccessSnackbar(message: 'تم اختيار صورة الهوية الأمامية بنجاح');
       } else {
-        Get.snackbar(
-          'تنبيه',
-          'لم يتم اختيار صورة الهوية الأمامية',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.amber,
-          colorText: Colors.black,
-        );
+        showInfoSnackbar(message: 'لم يتم اختيار صورة الهوية الأمامية');
       }
     } catch (e) {
-      Get.snackbar('Error', 'Failed to select front ID image');
+      showErrorSnackbar(message: 'فشل في اختيار صورة الهوية الأمامية');
     }
   }
 
@@ -104,40 +93,19 @@ class PageEightController extends GetxController {
           await pickImage(); // Replace with your image picker logic
 
       if (pickedImagePath != null) {
-        selectedFrontIDImage.value = pickedImagePath;
-        Get.snackbar(
-          'نجاح',
-          'تم اختيار صورة الهوية الأمامية بنجاح',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.green,
-          colorText: Colors.white,
-        );
+        selectedBackIDImage.value = pickedImagePath;
+        showSuccessSnackbar(message: 'تم اختيار صورة الهوية الخلفية بنجاح');
       } else {
-        Get.snackbar(
-          'تنبيه',
-          'لم يتم اختيار صورة الهوية الأمامية',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.amber,
-          colorText: Colors.black,
-        );
+        showInfoSnackbar(message: 'لم يتم اختيار صورة الهوية الخلفية');
       }
     } catch (e) {
-      Get.snackbar('Error', 'Failed to select back ID image');
+      showErrorSnackbar(message: 'فشل في اختيار صورة الهوية الخلفية');
     }
   }
 
   bool validatePassword() {
     return newPasswordController.text == confirmPasswordController.text &&
         newPasswordController.text.length >= 6;
-  }
-
-  void proceedToNextScreen() {
-    if (validatePassword()) {
-      // Navigate to next screen or perform next action
-      Get.snackbar('Success', 'Password set successfully');
-    } else {
-      Get.snackbar('Error', 'Passwords do not match or too short');
-    }
   }
 
   Map<String, dynamic> getFormData() {
@@ -156,12 +124,8 @@ class PageEightController extends GetxController {
     //   selectedPersonalImage.value.isEmpty ||
     !validatePassword()) {
       if (showSnackbar) {
-        Get.snackbar(
-          'تنبيه',
-          'الرجاء تحميل جميع الصور وإدخال كلمة مرور صالحة',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.amber,
-          colorText: Colors.black,
+        showInfoSnackbar(
+          message: 'الرجاء تحميل جميع الصور وإدخال كلمة مرور صالحة',
         );
       }
       return false;

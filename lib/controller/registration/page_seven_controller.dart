@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nas/view/widget/custom_snackbar.dart';
 
 class PageSevenController extends GetxController {
   final genderOptions = ['ذكر', 'أنثى'];
@@ -46,25 +47,6 @@ class PageSevenController extends GetxController {
         phoneController.text.isNotEmpty;
   }
 
-  void submitForm() {
-    if (validateForm()) {
-      // Handle form submission
-      Get.snackbar(
-        'نجاح',
-        'تم تسجيل البيانات بنجاح',
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-      );
-    } else {
-      Get.snackbar(
-        'خطأ',
-        'يرجى ملء جميع الحقول',
-        backgroundColor: Colors.red,
-        colorText: Colors.white,
-      );
-    }
-  }
-
   Map<String, dynamic> getFormData() {
     return {
       'gender': selectedGender.value,
@@ -78,13 +60,7 @@ class PageSevenController extends GetxController {
   bool validate({bool showSnackbar = true}) {
     if (!validateForm()) {
       if (showSnackbar) {
-        Get.snackbar(
-          'تنبيه',
-          'الرجاء إكمال جميع الحقول المطلوبة',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.amber,
-          colorText: Colors.black,
-        );
+        showInfoSnackbar(message: 'الرجاء إكمال جميع الحقول المطلوبة');
       }
       return false;
     }

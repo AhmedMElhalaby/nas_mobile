@@ -8,6 +8,7 @@ class CustomTitle extends StatelessWidget {
   final Widget? widget;
   final bool? isIcon;
   final bool? supText;
+  final Color? color;
 
   const CustomTitle({
     super.key,
@@ -15,6 +16,7 @@ class CustomTitle extends StatelessWidget {
     this.isIcon = true,
     this.widget,
     this.supText,
+    this.color,
     this.supTitle,
   });
 
@@ -34,9 +36,9 @@ class CustomTitle extends StatelessWidget {
           width: double.infinity,
           padding: EdgeInsets.symmetric(horizontal: 25, vertical: 5),
           decoration: BoxDecoration(
-            color: AppTheme.secondaryColor,
+            color: color != null ? AppTheme.white : AppTheme.secondaryColor,
             borderRadius: BorderRadius.circular(15),
-            border: Border.all(color: AppTheme.white, width: 2),
+            border: Border.all(color: color ?? AppTheme.white, width: 2),
           ),
           child: Center(
             child:
@@ -46,7 +48,7 @@ class CustomTitle extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 22,
                     fontWeight: FontWeight.bold,
-                    color: AppTheme.white,
+                    color: color ?? AppTheme.white,
                   ),
                 ),
           ),

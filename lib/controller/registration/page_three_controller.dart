@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nas/view/widget/custom_snackbar.dart';
 
 class PageThreeController extends GetxController {
   final RxSet<String> selectedDays = <String>{}.obs;
@@ -43,12 +44,8 @@ class PageThreeController extends GetxController {
   bool validate({bool showSnackbar = true}) {
     if (!isFormValid) {
       if (showSnackbar) {
-        Get.snackbar(
-          'تنبيه',
-          'الرجاء اختيار يوم وفترة زمنية واحدة على الأقل',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.amber,
-          colorText: Colors.black,
+        showInfoSnackbar(
+          message: 'الرجاء اختيار يوم وفترة زمنية واحدة على الأقل',
         );
       }
       return false;

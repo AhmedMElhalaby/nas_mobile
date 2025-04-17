@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nas/data/model/notification_item.dart';
 import 'package:nas/view/widget/button_border.dart';
+import 'package:nas/view/widget/custom_snackbar.dart';
 
 import '../../core/constant/theme.dart';
 
@@ -53,13 +54,7 @@ class NotificationsController extends GetxController {
 
   void markAllAsRead() {
     // Logic to mark all notifications as read
-    Get.snackbar(
-      'تم',
-      'تم تعليم جميع الإشعارات كمقروءة',
-      snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: Colors.green.withOpacity(0.7),
-      colorText: Colors.white,
-    );
+    showSuccessSnackbar(message: 'تم تعليم جميع الإشعارات كمقروءة');
   }
 
   void showNotification(NotificationItem v) {

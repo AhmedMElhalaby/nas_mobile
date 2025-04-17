@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nas/core/constant/theme.dart';
 import 'package:nas/view/widget/button_border.dart';
+import 'package:nas/view/widget/custom_snackbar.dart';
 
 class PageTwoController extends GetxController {
   RxList<bool> selectedTasks = <bool>[].obs;
@@ -39,18 +40,6 @@ class PageTwoController extends GetxController {
     }
   }
 
-  void saveSelection() {
-    if (validate()) {
-      Get.snackbar(
-        'تم الحفظ',
-        'تم حفظ اختياراتك بنجاح',
-        backgroundColor: Colors.green,
-        colorText: Colors.white,
-        snackPosition: SnackPosition.BOTTOM,
-      );
-    }
-  }
-
   bool get isAnyTaskSelected => selectedTasks.any((task) => task == true);
   // Retrieve form data
   Map<String, dynamic> getFormData() {
@@ -68,13 +57,7 @@ class PageTwoController extends GetxController {
   bool validate({bool showSnackbar = true}) {
     if (isAnyTaskSelected == false) {
       if (showSnackbar) {
-        Get.snackbar(
-          'تنبيه',
-          'الرجاء اختيار مهمة واحدة على الأقل',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.amber,
-          colorText: Colors.black,
-        );
+        showInfoSnackbar(message: 'الرجاء اختيار مهمة واحدة على الأقل');
       }
       return false;
     }

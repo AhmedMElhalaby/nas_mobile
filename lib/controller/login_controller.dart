@@ -42,11 +42,7 @@ class LoginController extends GetxController {
         print('Validation failed');
       }
     } catch (e) {
-      Get.snackbar(
-        'Error',
-        'Login failed: $e',
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      showErrorSnackbar(message: e.toString());
     }
   }
 
@@ -68,7 +64,6 @@ class LoginController extends GetxController {
     Get.to(
       () => WorkerRegistrationScreen(),
     ); // Navigate to the worker registration screen
-    print('Join work tapped');
   }
 
   // Need help method
@@ -76,7 +71,6 @@ class LoginController extends GetxController {
     // Implement help logic
     Get.focusScope?.unfocus();
     needHelpDialog();
-    print('Need help tapped');
   }
 
   @override

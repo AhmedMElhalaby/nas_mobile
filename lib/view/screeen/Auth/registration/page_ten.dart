@@ -71,6 +71,7 @@ class PageTen extends StatelessWidget {
                                       children: controller
                                           .getUnderlinedTextSpans(
                                             controller.terms[index],
+                                            index,
                                           ),
                                     ),
                                     textDirection:

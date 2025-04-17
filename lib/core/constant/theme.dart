@@ -9,6 +9,7 @@ class AppTheme {
   static const Color primaryColor = Color(0xff121212);
   static const Color secondaryColor = Color(0xff1D1D1D);
   static const Color green = Color(0xff00E17B);
+  static const Color yeallow = Color(0xffFFD21E);
 
   static ThemeData appTheme = ThemeData(
     fontFamily: "ElMessiri",

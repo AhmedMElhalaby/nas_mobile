@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nas/core/constant/theme.dart';
+import 'package:nas/view/widget/custom_snackbar.dart';
 
 class PageFourController extends GetxController {
   final RxSet<String> selectedWorkHours = <String>{}.obs;
@@ -171,13 +172,7 @@ class PageFourController extends GetxController {
   bool validate({bool showSnackbar = true}) {
     if (!isFormValid) {
       if (showSnackbar) {
-        Get.snackbar(
-          'تنبيه',
-          'الرجاء إكمال جميع الحقول المطلوبة',
-          snackPosition: SnackPosition.BOTTOM,
-          backgroundColor: Colors.amber,
-          colorText: Colors.black,
-        );
+        showInfoSnackbar(message: 'الرجاء إكمال جميع الحقول المطلوبة');
       }
       return false;
     }
