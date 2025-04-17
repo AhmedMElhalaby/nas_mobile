@@ -34,7 +34,8 @@ class PageTwo extends StatelessWidget {
                           controller.tasks.length,
                           (index) => CustomCheckbox(
                             icon: true,
-                            onIconTap: () => controller.showSuccessDialog(),
+                            onIconTap:
+                                () => controller.showSuccessDialog(index),
                             title: controller.tasks[index],
                             textStyle: AppTheme.textTheme20,
                             isSelected: controller.selectedTasks[index],

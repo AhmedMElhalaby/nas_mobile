@@ -168,7 +168,7 @@ class CustomBottomSheet extends StatelessWidget {
       ''';
 
       default:
-        return 'محتوى المستند غير متوفر حالياً';
+        return documentType;
     }
   }
 }

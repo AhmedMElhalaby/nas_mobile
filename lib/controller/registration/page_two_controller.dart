@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:nas/core/constant/theme.dart';
-import 'package:nas/view/widget/button_border.dart';
+import 'package:nas/controller/registration/custom_bottom_sheet.dart';
+
 import 'package:nas/view/widget/custom_snackbar.dart';
 
 class PageTwoController extends GetxController {
@@ -64,46 +64,21 @@ class PageTwoController extends GetxController {
     return true;
   }
 
-  void showSuccessDialog() {
-    Get.dialog(
-      Dialog(
-        // Add margin to the entire Dialog
-        insetPadding: EdgeInsets.symmetric(horizontal: 68),
-
-        child: ClipRRect(
-          borderRadius: BorderRadius.circular(20),
-          child: Container(
-            // height: 183,
-            color: AppTheme.white,
-            padding: EdgeInsets.all(16),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-
-              children: [
-                Text(
-                  "طبيعة العمل تكون في المطبخ حيث تعمل مع الشيف",
-                  textAlign: TextAlign.center,
-                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
-                ),
-                SizedBox(height: 20),
-
-                ButtonBorder(
-                  height: 30,
-                  borderRadius: 10,
-
-                  onTap: () {
-                    Get.back(); // Close the dialog
-                  },
-                  text: "إغلاق",
-                  color: AppTheme.primaryColor,
-                ),
-              ],
-            ),
-          ),
-        ),
+  void showSuccessDialog(int index) {
+    Get.bottomSheet(
+      CustomBottomSheet(
+        title: tasks[index],
+        documentType: '''
+سياسة : السلامة هي محور إهتمامنا الأولقاعدة العمل: يجب على الأفراد إرتداء خوذة عند تواجدهم في موقع البناء.يجب على المفتشين القيام بدورات تفتيشية أسبوعية على مواقع البناء والتأكد من استيفاء اشتراطات السلامة.إذا تعطلت آلة تكسير الخرسانة في الموقع فيجب تبديلها خلال 4 ساعات من العطل.سياسة: نحرص على أن نقوم بأعمال الصيانة بطريقة تزيد من عمر الأجهزة وفعاليتهاقاعدة العمل: إذا مر عام على تسليم الأجهزة لفريق العمل فيجب على فني الصيانة مراجعة الأجهزة المسلمة للفريق والتأكد من أن لا تقل سرعتها عن...
+كما نرى قواعد العمل مكتوبة على مستوى تشغيلي محدد يمكن قياسه واختباره.
+لماذا نضيع الوقت في كتابة سياسات تبدو عامة وتحتاج دائماً إلى تفسير؟ لماذا لا نكتب قواعد العمل مباشرة؟
+السياسات المكتوبة بشكل جيد تحرر وقت القيادات من الإنشغال بالمواقف التشغيلية التي يمكن أن يعالجها الموظفات والموظفين بشيء من الحرية والسرعة التي يتطلبها الموقف التشغيلي دون إشراك القيادات، السياسات المكتوبة بشكل جيد توضح حدود الموظفات والموظفين في اتخاذ القرار وتمنحهم قدر جيد من الحرية لتغيير قواعد عملهم بما يتناسب مع الإحتياجات المتغيرة للعمليات التشغيلية.''',
+        termIndex: index, // ⬅️ نمرر الفهرس هنا
       ),
-      barrierDismissible: false,
+      isScrollControlled: true,
+      backgroundColor: Colors.transparent,
+      elevation: 0,
+      enableDrag: true,
     );
   }
 }

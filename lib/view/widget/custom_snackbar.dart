@@ -122,13 +122,13 @@ void customSnackbar({
             ),
 
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 7.0),
               child: // Animated progress indicator
                   ValueListenableBuilder<double>(
                 valueListenable: progressController,
                 builder: (context, value, _) {
                   return TweenAnimationBuilder<double>(
-                    tween: Tween<double>(begin: 0.0, end: value),
+                    tween: Tween<double>(begin: 1, end: 0),
                     duration: duration, // ← Sync with snackbar duration
                     builder: (context, animatedValue, _) {
                       return Directionality(
@@ -138,7 +138,7 @@ void customSnackbar({
                           borderRadius: BorderRadius.circular(12),
                           backgroundColor: AppTheme.white,
                           color: color,
-                          minHeight: 4,
+                          minHeight: 6,
                         ),
                       );
                     },
