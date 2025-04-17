@@ -5,6 +5,7 @@ import 'package:nas/view/screen/Auth/forgetPassword/forget_password.dart';
 import 'package:nas/view/screen/Auth/worker_registration_screen.dart';
 import 'package:nas/view/screen/main/main_home_screen.dart';
 import 'package:nas/view/widget/button_border.dart';
+import 'package:nas/view/widget/custom_snackbar.dart';
 import 'package:nas/view/widget/primary_button.dart';
 
 import 'worker_registration_controller.dart';
@@ -34,6 +35,7 @@ class LoginController extends GetxController {
       if (formstate.currentState != null &&
           formstate.currentState!.validate()) {
         // Simulate API call or authentication logic
+        showSuccessSnackbar();
         print('Login successful');
         Get.offAll(() => MainHomeScreen());
       } else {

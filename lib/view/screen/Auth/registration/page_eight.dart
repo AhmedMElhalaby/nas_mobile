@@ -135,7 +135,7 @@ Widget _buildDocumentUploadButton({
         SizedBox(
           height: 23,
           child: MaterialButton(
-            onPressed: () {},
+            onPressed: onPressed,
             shape: OutlineInputBorder(
               borderRadius: BorderRadius.circular(15),
               borderSide: BorderSide(color: AppTheme.white, width: 2),

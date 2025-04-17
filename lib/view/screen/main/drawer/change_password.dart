@@ -18,60 +18,63 @@ class ChangePassword extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppTheme.primaryColor,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                SizedBox(height: Get.height * 0.05), // 5% من ارتفاع الشاشة
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  SizedBox(height: Get.height * 0.05), // 5% من ارتفاع الشاشة
 
-                Image.asset(
-                  AppUrl.logo,
-                  height: Get.height * 0.1, // 10% من ارتفاع الشاشة
-                  width: Get.width * 0.3,
-                  fit: BoxFit.scaleDown,
-                ),
-                SizedBox(height: Get.height / 8),
+                  Image.asset(
+                    AppUrl.logo,
+                    height: Get.height * 0.1, // 10% من ارتفاع الشاشة
+                    width: Get.width * 0.3,
+                    fit: BoxFit.scaleDown,
+                  ),
+                  SizedBox(height: Get.height / 8),
 
-                CustomTitle(
-                  title: "إنشاء كلمة مرور",
-                  supText: true,
-                  supTitle: "(6 خانات على الأقل)",
-                ),
-                SizedBox(height: 14),
+                  CustomTitle(
+                    title: "إنشاء كلمة مرور",
+                    supText: true,
+                    supTitle: "(6 خانات على الأقل)",
+                  ),
+                  SizedBox(height: 14),
 
-                buildPasswordField(
-                  focusNode: controller.oldPasswordFocusNode,
-                  textController: controller.oldPasswordController,
-                  text: "كلمة المرور القديمة",
-                  onEditingComplete:
-                      () => controller.handleFocusTransition(
-                        controller.oldPasswordFocusNode,
-                        controller.newPasswordFocusNode,
-                      ),
-                ),
-                SizedBox(height: 10.h),
-                buildPasswordField(
-                  focusNode: controller.newPasswordFocusNode,
-                  textController: controller.newPasswordController,
-                  text: "كلمة المرور الجديدة",
-                  onEditingComplete:
-                      () => controller.handleFocusTransition(
-                        controller.newPasswordFocusNode,
-                        controller.confirmPasswordFocusNode,
-                      ),
-                ),
-                SizedBox(height: 10.h),
+                  buildPasswordField(
+                    focusNode: controller.oldPasswordFocusNode,
+                    textController: controller.oldPasswordController,
+                    text: "كلمة المرور القديمة",
+                    onEditingComplete:
+                        () => controller.handleFocusTransition(
+                          controller.oldPasswordFocusNode,
+                          controller.newPasswordFocusNode,
+                        ),
+                  ),
+                  SizedBox(height: 10.h),
+                  buildPasswordField(
+                    focusNode: controller.newPasswordFocusNode,
+                    textController: controller.newPasswordController,
+                    text: "كلمة المرور الجديدة",
+                    onEditingComplete:
+                        () => controller.handleFocusTransition(
+                          controller.newPasswordFocusNode,
+                          controller.confirmPasswordFocusNode,
+                        ),
+                  ),
+                  SizedBox(height: 10.h),
 
-                buildPasswordField(
-                  focusNode: controller.confirmPasswordFocusNode,
-                  textController: controller.confirmPasswordController,
-                  text: "اعادة كلمة المرور",
-                  onEditingComplete:
-                      () => controller.confirmPasswordFocusNode.unfocus(),
-                ),
-              ],
+                  buildPasswordField(
+                    focusNode: controller.confirmPasswordFocusNode,
+                    textController: controller.confirmPasswordController,
+                    text: "اعادة كلمة المرور",
+                    onEditingComplete:
+                        () => controller.confirmPasswordFocusNode.unfocus(),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

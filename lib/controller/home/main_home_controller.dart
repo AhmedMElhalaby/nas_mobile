@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:nas/core/constant/theme.dart';
 import 'package:nas/view/screen/main/approvals_screen.dart';
 import 'package:nas/view/screen/main/new_screen.dart';
 import 'package:nas/view/screen/main/violations_screen.dart';
 import 'package:nas/view/screen/main/waiting_screen.dart';
+import 'package:nas/view/widget/button_border.dart';
 
 class MainHomeController extends GetxController
     with GetTickerProviderStateMixin {
@@ -56,8 +59,14 @@ class MainHomeController extends GetxController
   // Method to toggle the drawer
   void toggleDrawer() {
     if (isDrawerOpen.value) {
+      SystemChrome.setEnabledSystemUIMode(
+        SystemUiMode.manual,
+        overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom],
+      );
       drawerAnimationController?.reverse();
     } else {
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
+
       drawerAnimationController?.forward();
     }
     isDrawerOpen.value = !isDrawerOpen.value;
@@ -89,5 +98,65 @@ class MainHomeController extends GetxController
     drawerAnimationController
         ?.dispose(); // Explicitly dispose the drawer animation controller
     super.onClose();
+  }
+
+  Future<bool> showkDialog() async {
+    final result = await showBackDialog(); // Corrected variable declaration
+    return result ?? false; // Default to false if dialog dismissed
+  }
+
+  showBackDialog() {
+    Get.dialog(
+      Dialog(
+        // Add margin to the entire Dialog
+        insetPadding: EdgeInsets.symmetric(horizontal: 33),
+
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            // height: 183,
+            color: AppTheme.white,
+            padding: EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+
+              children: [
+                Text(
+                  "هل أنت متأكد أنك تريد مغادرة التطبيق؟",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(height: Get.height * 0.026),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ButtonBorder(
+                      height: Get.height * 0.04,
+                      borderRadius: 10,
+                      onTap: () {
+                        SystemNavigator.pop();
+                      },
+                      text: 'تأكيد',
+                      color: AppTheme.red,
+                    ),
+                    SizedBox(width: 30),
+                    ButtonBorder(
+                      height: Get.height * 0.04,
+                      borderRadius: 10,
+                      onTap: () => Get.back(result: false), // Return false
+                      text: "إغلاق",
+                      color: AppTheme.primaryColor,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      barrierDismissible: false,
+    );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:nas/core/constant/theme.dart';
@@ -11,6 +12,7 @@ class TextFormFiledWidget extends StatefulWidget {
   final bool isPassword;
   final FocusNode? focusNode;
   final VoidCallback? onEditingComplete;
+  final List<TextInputFormatter>? inputFormatters;
 
   final String? Function(String?)? validator;
   final TextInputType? keyboardType;
@@ -24,6 +26,7 @@ class TextFormFiledWidget extends StatefulWidget {
     this.keyboardType,
     this.onEditingComplete,
     this.focusNode,
+    this.inputFormatters,
   });
 
   @override
@@ -74,6 +77,7 @@ class _TextFormFiledWidgetState extends State<TextFormFiledWidget> {
                 keyboardType: widget.keyboardType,
                 validator: widget.validator ?? _defaultValidator,
                 textAlignVertical: TextAlignVertical.center,
+                inputFormatters: widget.inputFormatters,
                 maxLines: 1,
                 cursorHeight: Get.height * 0.026, // Adjust this value as needed
                 cursorWidth: Get.width * 0.004,

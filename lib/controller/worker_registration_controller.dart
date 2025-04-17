@@ -133,6 +133,20 @@ class WorkerRegistrationController extends GetxController {
     () => Get.find<PageNineController>().validate(showSnackbar: false),
     () => Get.find<PageTenController>().validate(showSnackbar: false),
   ];
+
+  Future<void> handleSwipeBack() async {
+    if (currentPage.value == 0) {
+      final hasData = Get.find<PageOneController>().hasInputData();
+      if (hasData) {
+        showBackDialog();
+      } else {
+        Get.back();
+      }
+    } else {
+      previousPage();
+    }
+  }
+
   // Validate the current page
   bool validateCurrentPage({bool showSnackbar = false}) {
     switch (currentPage.value) {
@@ -194,7 +208,7 @@ class WorkerRegistrationController extends GetxController {
     Get.dialog(
       Dialog(
         // Add margin to the entire Dialog
-        insetPadding: EdgeInsets.symmetric(horizontal: 68),
+        insetPadding: EdgeInsets.symmetric(horizontal: 33),
 
         child: ClipRRect(
           borderRadius: BorderRadius.circular(20),
@@ -219,10 +233,72 @@ class WorkerRegistrationController extends GetxController {
                   borderRadius: 10,
 
                   onTap: () {
-                    Get.offAll(() => LoginScreen());
+                    Get.back(); // Close the dialog first
+
+                    Get.delete<
+                      WorkerRegistrationController
+                    >(); // Delete the controller
+
+                    Get.off(() => LoginScreen());
                   },
                   text: "إغلاق",
                   color: AppTheme.primaryColor,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+      barrierDismissible: false,
+    );
+  }
+
+  void showBackDialog() {
+    Get.dialog(
+      Dialog(
+        // Add margin to the entire Dialog
+        insetPadding: EdgeInsets.symmetric(horizontal: 33),
+
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(20),
+          child: Container(
+            // height: 183,
+            color: AppTheme.white,
+            padding: EdgeInsets.all(16),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              mainAxisAlignment: MainAxisAlignment.center,
+
+              children: [
+                Text(
+                  "قد تفقد البيانات التي سجلتها، هل تريد مغادرة الصفحة؟",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w500),
+                ),
+                SizedBox(height: Get.height * 0.026),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    ButtonBorder(
+                      height: Get.height * 0.04,
+                      borderRadius: 10,
+                      onTap: () {
+                        Get.back();
+                        Get.back();
+                      },
+                      text: 'تأكيد',
+                      color: AppTheme.red,
+                    ),
+                    SizedBox(width: 30),
+                    ButtonBorder(
+                      height: Get.height * 0.04,
+                      borderRadius: 10,
+                      onTap: () => Get.back(),
+                      text: "إغلاق",
+                      color: AppTheme.primaryColor,
+                    ),
+                  ],
                 ),
               ],
             ),

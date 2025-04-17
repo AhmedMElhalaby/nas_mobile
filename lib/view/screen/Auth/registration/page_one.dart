@@ -34,6 +34,7 @@ class PageOne extends StatelessWidget {
                     )
                     // ignore: unnecessary_to_list_in_spreads
                     .toList(),
+                SizedBox(height: 8),
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

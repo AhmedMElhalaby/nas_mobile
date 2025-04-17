@@ -89,6 +89,11 @@ class PageOneController extends GetxController {
     return true;
   }
 
+  bool hasInputData() {
+    return selectedSource.value.isNotEmpty ||
+        otherSourceController.text.isNotEmpty;
+  }
+
   @override
   void onClose() {
     otherSourceController.dispose();

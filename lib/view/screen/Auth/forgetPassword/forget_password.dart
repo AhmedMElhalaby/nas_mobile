@@ -20,75 +20,78 @@ class ForgetPassword extends StatelessWidget {
     return Scaffold(
       backgroundColor: AppTheme.primaryColor,
 
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 33.0),
-          child: Column(
-            children: [
-              SizedBox(height: Get.height * 0.1),
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 33.0),
+            child: Column(
+              children: [
+                SizedBox(height: Get.height * 0.1),
 
-              Image.asset(
-                AppUrl.logo,
-                width: Get.width * 0.3,
-                height: Get.width * 0.3,
-              ),
-              SizedBox(height: 10),
-              CustomTitle(title: "هل نسيت كلمة المرور؟"),
-              SizedBox(height: 13),
-
-              Text(
-                "أدخل رقمك هاتفك لنرسل لك كود التحقق",
-                style: AppTheme.textTheme14.copyWith(),
-              ),
-
-              SizedBox(height: Get.height * 0.1),
-
-              Form(
-                key: controller.phoneFormKey,
-                child: GetBuilder<LoginController>(
-                  builder:
-                      (_) => TextFormFiledWidget(
-                        text: 'رقم الهاتف',
-                        keyboardType: TextInputType.phone,
-                        onEditingComplete:
-                            () => controller.handleFocusTransition(
-                              controller.phoneFocusNode,
-                              controller.passwordFocusNode,
-                            ),
-                        focusNode: controller.phoneFocusNode,
-                        textEditingController: controller.phoneController,
-                      ),
+                Image.asset(
+                  AppUrl.logo,
+                  width: Get.width * 0.3,
+                  height: Get.width * 0.3,
                 ),
-              ),
-              SizedBox(height: Get.height * 0.1),
+                SizedBox(height: 10),
+                CustomTitle(title: "هل نسيت كلمة المرور؟"),
+                SizedBox(height: 13),
 
-              Row(
-                children: [
-                  Expanded(
-                    child: PrimaryButton(
-                      height: 36,
-                      onTap: () {
-                        controller.sendCode();
-                      },
-                      text: "إرسال",
-                    ),
+                Text(
+                  "أدخل رقمك هاتفك لنرسل لك كود التحقق",
+                  style: AppTheme.textTheme14.copyWith(),
+                ),
+
+                SizedBox(height: Get.height * 0.1),
+
+                Form(
+                  key: controller.phoneFormKey,
+                  child: GetBuilder<LoginController>(
+                    builder:
+                        (_) => TextFormFiledWidget(
+                          text: 'رقم الهاتف',
+                          keyboardType: TextInputType.phone,
+                          onEditingComplete:
+                              () => controller.handleFocusTransition(
+                                controller.phoneFocusNode,
+                                controller.passwordFocusNode,
+                              ),
+                          focusNode: controller.phoneFocusNode,
+                          textEditingController: controller.phoneController,
+                        ),
                   ),
+                ),
+                SizedBox(height: Get.height * 0.1),
 
-                  SizedBox(width: Get.width * 0.08),
-
-                  Expanded(
-                    child: ButtonBorder(
-                      height: 36,
-
-                      onTap: () {
-                        Get.back();
-                      },
-                      text: "عودة",
+                Row(
+                  children: [
+                    Expanded(
+                      child: PrimaryButton(
+                        height: 36,
+                        onTap: () {
+                          controller.sendCode();
+                        },
+                        text: "إرسال",
+                      ),
                     ),
-                  ),
-                ],
-              ),
-            ],
+
+                    SizedBox(width: Get.width * 0.08),
+
+                    Expanded(
+                      child: ButtonBorder(
+                        height: 36,
+
+                        onTap: () {
+                          Get.back();
+                        },
+                        text: "عودة",
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

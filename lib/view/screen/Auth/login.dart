@@ -20,149 +20,169 @@ class LoginScreen extends StatelessWidget {
     final height = Get.height;
     return Scaffold(
       backgroundColor: AppTheme.primaryColor,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 30),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(height: height * 0.1),
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 30),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(height: height * 0.1),
 
-                Center(
-                  child: Image.asset(
-                    AppUrl.logo,
-                    width: width * 0.3,
-                    height: width * 0.3,
-                    fit: BoxFit.contain,
+                  Center(
+                    child: Image.asset(
+                      AppUrl.logo,
+                      width: width * 0.3,
+                      height: width * 0.3,
+                      fit: BoxFit.contain,
+                    ),
                   ),
-                ),
 
-                SizedBox(height: height * 0.08),
+                  SizedBox(height: height * 0.08),
 
-                Form(
-                  key: controller.formstate,
-                  child: Column(
-                    children: [
-                      GetBuilder<LoginController>(
-                        builder:
-                            (_) => TextFormFiledWidget(
-                              text: 'رقم الهاتف',
-                              keyboardType: TextInputType.phone,
-                              onEditingComplete:
-                                  () => controller.handleFocusTransition(
-                                    controller.phoneFocusNode,
-                                    controller.passwordFocusNode,
-                                  ),
-                              focusNode: controller.phoneFocusNode,
-                              textEditingController: controller.phoneController,
-                            ),
-                      ),
-
-                      SizedBox(height: height * 0.06),
-
-                      GetBuilder<LoginController>(
-                        builder:
-                            (_) => TextFormFiledWidget(
-                              text: "كلمة المرور",
-                              isPassword: true,
-                              onEditingComplete:
-                                  () => controller.passwordFocusNode.unfocus(),
-                              focusNode: controller.passwordFocusNode,
-                              textEditingController:
-                                  controller.passwordController,
-                            ),
-                      ),
-                    ],
-                  ),
-                ),
-
-                SizedBox(height: height * 0.03),
-
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: width * 0.01),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      Expanded(
-                        child: GetBuilder<LoginController>(
+                  Form(
+                    key: controller.formstate,
+                    child: Column(
+                      children: [
+                        GetBuilder<LoginController>(
                           builder:
-                              (_) => CustomCheckbox(
-                                icon: false,
-                                padding: EdgeInsets.only(top: height * 0.01),
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                title: "تذكرني",
-                                richText: Padding(
-                                  padding: const EdgeInsets.only(top: 5.0),
-                                  child: Text(
-                                    "تذكرني",
-                                    style: AppTheme.textTheme16.copyWith(
-                                      color: AppTheme.white,
-                                      fontWeight: FontWeight.w500,
+                              (_) => TextFormFiledWidget(
+                                text: 'رقم الهاتف',
+                                validator: (value) {
+                                  return null;
+
+                                  // if (value == null || value.isEmpty) {
+                                  //   return 'يرجى إدخال رقم الهاتف';
+                                  // }
+                                  // if (!RegExp(r'^05\d{8}$').hasMatch(value)) {
+                                  //   return 'رقم الهاتف غير صالح، يجب أن يبدأ بـ05 ويتكون من 10 أرقام';
+                                  // }
+                                  // return null;
+                                },
+                                // inputFormatters: [
+                                //   FilteringTextInputFormatter
+                                //       .digitsOnly, // يسمح فقط بالأرقام 0-9
+                                // ],
+                                keyboardType: TextInputType.number,
+                                onEditingComplete:
+                                    () => controller.handleFocusTransition(
+                                      controller.phoneFocusNode,
+                                      controller.passwordFocusNode,
                                     ),
-                                  ),
-                                ),
-                                isSelected: controller.rememberMe,
-                                onChanged:
-                                    () => controller.toggleRememberMe(
-                                      !controller.rememberMe,
-                                    ), // تمرير القيمة الجديدة
+                                focusNode: controller.phoneFocusNode,
+                                textEditingController:
+                                    controller.phoneController,
                               ),
                         ),
-                      ),
-                      TextButton(
-                        onPressed: controller.forgotPassword,
-                        child: Text(
-                          'نسيت كلمة المرور؟',
-                          style: AppTheme.textTheme16.copyWith(
-                            color: AppTheme.red,
-                            fontWeight: FontWeight.w500,
+
+                        SizedBox(height: height * 0.06),
+
+                        GetBuilder<LoginController>(
+                          builder:
+                              (_) => TextFormFiledWidget(
+                                text: "كلمة المرور",
+                                isPassword: true,
+                                onEditingComplete:
+                                    () =>
+                                        controller.passwordFocusNode.unfocus(),
+                                focusNode: controller.passwordFocusNode,
+                                textEditingController:
+                                    controller.passwordController,
+                              ),
+                        ),
+                      ],
+                    ),
+                  ),
+
+                  SizedBox(height: height * 0.03),
+
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: width * 0.01),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        Expanded(
+                          child: GetBuilder<LoginController>(
+                            builder:
+                                (_) => CustomCheckbox(
+                                  icon: false,
+                                  padding: EdgeInsets.only(top: height * 0.01),
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  title: "تذكرني",
+                                  richText: Padding(
+                                    padding: const EdgeInsets.only(top: 5.0),
+                                    child: Text(
+                                      "تذكرني",
+                                      style: AppTheme.textTheme16.copyWith(
+                                        color: AppTheme.white,
+                                        fontWeight: FontWeight.w500,
+                                      ),
+                                    ),
+                                  ),
+                                  isSelected: controller.rememberMe,
+                                  onChanged:
+                                      () => controller.toggleRememberMe(
+                                        !controller.rememberMe,
+                                      ), // تمرير القيمة الجديدة
+                                ),
                           ),
+                        ),
+                        TextButton(
+                          onPressed: controller.forgotPassword,
+                          child: Text(
+                            'نسيت كلمة المرور؟',
+                            style: AppTheme.textTheme16.copyWith(
+                              color: AppTheme.red,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: height * 0.03),
+
+                  Row(
+                    children: [
+                      Expanded(
+                        child: PrimaryButton(
+                          onTap: controller.login,
+                          text: "دخول",
+                        ),
+                      ),
+
+                      SizedBox(width: width * 0.08),
+
+                      Expanded(
+                        child: ButtonBorder(
+                          onTap: controller.joinWork,
+
+                          text: "إنضم للعمل",
                         ),
                       ),
                     ],
                   ),
-                ),
-                SizedBox(height: height * 0.03),
 
-                Row(
-                  children: [
-                    Expanded(
-                      child: PrimaryButton(
-                        onTap: controller.login,
-                        text: "دخول",
-                      ),
-                    ),
-
-                    SizedBox(width: width * 0.08),
-
-                    Expanded(
-                      child: ButtonBorder(
-                        onTap: controller.joinWork,
-
-                        text: "إنضم للعمل",
-                      ),
-                    ),
-                  ],
-                ),
-
-                Padding(
-                  padding: EdgeInsets.only(top: height * 0.03),
-                  child: GestureDetector(
-                    onTap: controller.needHelp,
-                    child: Text(
-                      'تحتاج مساعدة؟',
-                      style: AppTheme.textTheme16.copyWith(
-                        color: AppTheme.transparent,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w500,
+                  Padding(
+                    padding: EdgeInsets.only(top: height * 0.03),
+                    child: GestureDetector(
+                      onTap: controller.needHelp,
+                      child: Text(
+                        'تحتاج مساعدة؟',
+                        style: AppTheme.textTheme16.copyWith(
+                          color: AppTheme.transparent,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),

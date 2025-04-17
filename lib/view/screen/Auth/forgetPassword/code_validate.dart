@@ -17,54 +17,57 @@ class CodeValidate extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppTheme.primaryColor,
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 33.0),
-          child: Column(
-            children: [
-              SizedBox(height: Get.height * 0.1),
-
-              Image.asset(
-                AppUrl.logo,
-                height: Get.height * 0.1, // 10% من ارتفاع الشاشة
-                width: Get.width * 0.2,
-              ),
-              SizedBox(height: 10),
-              CustomTitle(title: "تحقق من الكود"),
-              SizedBox(height: 14),
-
-              Text(
-                "أدخل كود التحقق حتى تتمكن من إسترجاع الكلمة",
-                style: AppTheme.textTheme14,
-              ),
-
-              SizedBox(height: Get.height * 0.1),
-              Form(
-                child: CustomOtpField(
-                  numberOfFields: 4,
-                  onSubmit: (String otp) {
-                    print("OTP entered: $otp");
-                    controller.verifyOtp(otp);
-                    // Handle OTP submission
-                  },
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),  
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 33.0),
+            child: Column(
+              children: [
+                SizedBox(height: Get.height * 0.1),
+        
+                Image.asset(
+                  AppUrl.logo,
+                  height: Get.height * 0.1, // 10% من ارتفاع الشاشة
+                  width: Get.width * 0.2,
                 ),
-              ),
-              SizedBox(height: Get.height * 0.1),
-
-              Row(
-                children: [
-                  Expanded(
-                    child: PrimaryButton(
-                      onTap: () {
-                        controller.goToChangePassword();
-                      },
-                      text: "تحقق",
-                      height: 36,
-                    ),
+                SizedBox(height: 10),
+                CustomTitle(title: "تحقق من الكود"),
+                SizedBox(height: 14),
+        
+                Text(
+                  "أدخل كود التحقق حتى تتمكن من إسترجاع الكلمة",
+                  style: AppTheme.textTheme14,
+                ),
+        
+                SizedBox(height: Get.height * 0.1),
+                Form(
+                  child: CustomOtpField(
+                    numberOfFields: 4,
+                    onSubmit: (String otp) {
+                      print("OTP entered: $otp");
+                      controller.verifyOtp(otp);
+                      // Handle OTP submission
+                    },
                   ),
-                ],
-              ),
-            ],
+                ),
+                SizedBox(height: Get.height * 0.1),
+        
+                Row(
+                  children: [
+                    Expanded(
+                      child: PrimaryButton(
+                        onTap: () {
+                          controller.goToChangePassword();
+                        },
+                        text: "تحقق",
+                        height: 36,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

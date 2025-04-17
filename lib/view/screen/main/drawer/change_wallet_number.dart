@@ -19,92 +19,95 @@ class ChangeWalletNumber extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppTheme.primaryColor,
-      body: SafeArea(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30),
-          child: ListView(
-            children: [
-              SizedBox(height: Get.height * 0.05), // 5% من ارتفاع الشاشة
-
-              Image.asset(
-                AppUrl.logo,
-                height: Get.height * 0.1, // 10% من ارتفاع الشاشة
-                width: Get.width * 0.3,
-                fit: BoxFit.scaleDown,
-              ),
-              SizedBox(height: Get.height / 8),
-
-              CustomTitle(
-                title: "قبض المستحقات؟ CLIQ",
-                supText: true,
-                supTitle: "بإمكانك تغيير الخيارات لاحقاً",
-
-                widget: Text.rich(
-                  TextSpan(
-                    children: [
-                      TextSpan(
-                        text: 'قبض المستحقات؟ ',
-                        style: TextStyle(
-                          color: AppTheme.white,
-                          fontSize: 22.sp,
-                          fontWeight: FontWeight.w500,
+      body: GestureDetector(
+        onTap: () => FocusScope.of(context).unfocus(),
+        child: SafeArea(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 30),
+            child: ListView(
+              children: [
+                SizedBox(height: Get.height * 0.05), // 5% من ارتفاع الشاشة
+        
+                Image.asset(
+                  AppUrl.logo,
+                  height: Get.height * 0.1, // 10% من ارتفاع الشاشة
+                  width: Get.width * 0.3,
+                  fit: BoxFit.scaleDown,
+                ),
+                SizedBox(height: Get.height / 8),
+        
+                CustomTitle(
+                  title: "قبض المستحقات؟ CLIQ",
+                  supText: true,
+                  supTitle: "بإمكانك تغيير الخيارات لاحقاً",
+        
+                  widget: Text.rich(
+                    TextSpan(
+                      children: [
+                        TextSpan(
+                          text: 'قبض المستحقات؟ ',
+                          style: TextStyle(
+                            color: AppTheme.white,
+                            fontSize: 22.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      ),
-                      TextSpan(
-                        text: 'CLIQ',
-                        style: TextStyle(
-                          color: AppTheme.white,
-                          decorationColor: AppTheme.white,
-                          fontSize: 22.sp,
-                          fontWeight: FontWeight.w500,
-                          decoration: TextDecoration.underline,
+                        TextSpan(
+                          text: 'CLIQ',
+                          style: TextStyle(
+                            color: AppTheme.white,
+                            decorationColor: AppTheme.white,
+                            fontSize: 22.sp,
+                            fontWeight: FontWeight.w500,
+                            decoration: TextDecoration.underline,
+                          ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              SizedBox(height: 8),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-
-                children: [
-                  BuildTextField(
-                    text: "اسم صاحب الحساب",
-                    controller: controller.accountNameController,
-                    focusNode: controller.accountNameFocusNode,
-                    onEditingComplete: () {
-                      controller.accountNameFocusNode.unfocus();
-                      FocusScope.of(
-                        context,
-                      ).requestFocus(controller.departmentNameFocusNode);
-                    },
-                  ),
-                  SizedBox(height: 16.h),
-                  BuildTextField(
-                    text: "اسم الجهة",
-                    controller: controller.departmentNameController,
-                    focusNode: controller.departmentNameFocusNode,
-                    onEditingComplete: () {
-                      controller.departmentNameFocusNode.unfocus();
-                      FocusScope.of(
-                        context,
-                      ).requestFocus(controller.accountNumberFocusNode);
-                    },
-                  ),
-                  SizedBox(height: 16.h),
-
-                  BuildTextField(
-                    text: "رقم المحفظة",
-                    controller: controller.accountNumberController,
-                    focusNode: controller.accountNumberFocusNode,
-                    onEditingComplete: () {
-                      controller.accountNumberFocusNode.unfocus();
-                    },
-                  ),
-                ],
-              ),
-            ],
+                SizedBox(height: 8),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+        
+                  children: [
+                    BuildTextField(
+                      text: "اسم صاحب الحساب",
+                      controller: controller.accountNameController,
+                      focusNode: controller.accountNameFocusNode,
+                      onEditingComplete: () {
+                        controller.accountNameFocusNode.unfocus();
+                        FocusScope.of(
+                          context,
+                        ).requestFocus(controller.departmentNameFocusNode);
+                      },
+                    ),
+                    SizedBox(height: 16.h),
+                    BuildTextField(
+                      text: "اسم الجهة",
+                      controller: controller.departmentNameController,
+                      focusNode: controller.departmentNameFocusNode,
+                      onEditingComplete: () {
+                        controller.departmentNameFocusNode.unfocus();
+                        FocusScope.of(
+                          context,
+                        ).requestFocus(controller.accountNumberFocusNode);
+                      },
+                    ),
+                    SizedBox(height: 16.h),
+        
+                    BuildTextField(
+                      text: "رقم المحفظة",
+                      controller: controller.accountNumberController,
+                      focusNode: controller.accountNumberFocusNode,
+                      onEditingComplete: () {
+                        controller.accountNumberFocusNode.unfocus();
+                      },
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ),
         ),
       ),

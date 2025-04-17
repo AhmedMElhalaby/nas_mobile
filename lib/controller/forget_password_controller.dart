@@ -78,7 +78,7 @@ class ForgetPasswordController extends GetxController {
     Get.focusScope?.unfocus();
 
     final confirmPassword = confirmPasswordController.text.trim();
-    print("password ${password}, confirmPassword ${confirmPassword}");
+    print("password $password, confirmPassword $confirmPassword");
     if (password.isEmpty || confirmPassword.isEmpty) {
       Get.snackbar(
         "خطأ",
