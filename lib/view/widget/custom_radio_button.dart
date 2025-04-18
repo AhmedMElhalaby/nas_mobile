@@ -6,13 +6,17 @@ class CustomRadioButton extends StatelessWidget {
   final bool isSelected;
   final VoidCallback onTap;
   final TextStyle? textStyle;
+  final double? size;
+  final double? width;
 
   const CustomRadioButton({
     super.key,
     required this.title,
     required this.isSelected,
     required this.onTap,
+    this.size = 16.0,
     this.textStyle,
+    this.width,
   });
 
   @override
@@ -20,6 +24,7 @@ class CustomRadioButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        width: width ?? double.infinity,
         color: Colors.transparent,
         padding: EdgeInsets.symmetric(vertical: 8),
         child: Row(
@@ -27,8 +32,8 @@ class CustomRadioButton extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Container(
-              width: 16,
-              height: 16,
+              width: size,
+              height: size,
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 border: Border.all(color: Colors.white, width: 2),

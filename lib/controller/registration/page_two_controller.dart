@@ -6,6 +6,13 @@ import 'package:nas/view/widget/custom_snackbar.dart';
 
 class PageTwoController extends GetxController {
   RxList<bool> selectedTasks = <bool>[].obs;
+  RxList<int> selectedWithQuestion = <int>[].obs;
+  RxBool showDrinkQuestion = false.obs; // متغير يظهر سؤال الكحول
+  RxBool acceptAlcohol =
+      false.obs; // لتخزين إذا كان المستخدم يقبل تقديم الكحول أم لا
+  RxList<bool?> taskAnswers =
+      List.generate(6, (_) => false).obs; // Initially null for all tasks
+  final selectedSource = ''.obs;
 
   final List<String> tasks = [
     'مقدم طعام وشراب',
@@ -15,7 +22,16 @@ class PageTwoController extends GetxController {
     'نظافة وجلي المطبخ',
     'تحميل وتنزيل',
   ];
-  taskSelectionController() {
+  final List<String> taskQuestions = [
+    'هل يمكنك تقديم الكحول في حال قبوله؟',
+    'هل لديك خبرة في تقطيع الخضار؟',
+    'هل تستطيع ترتيب الأسرّة بسرعة؟',
+    'هل لديك خبرة في تنظيف الحمامات؟',
+    'هل تلتزم بمعايير النظافة الصحية؟',
+    'هل تستطيع رفع أوزان ثقيلة؟',
+  ];
+
+  void taskSelectionController() {
     // Initialize with false for each task
     selectedTasks.value = List.generate(tasks.length, (index) => false);
   }
@@ -37,6 +53,20 @@ class PageTwoController extends GetxController {
     if (index >= 0 && index < selectedTasks.length) {
       selectedTasks[index] = !selectedTasks[index];
       selectedTasks.refresh(); // Notify listeners of the change
+
+      // Update the question visibility if task is "مقدم طعام وشراب"
+      if (tasks[index] == 'مقدم طعام وشراب') {
+        showDrinkQuestion.value = selectedTasks[index];
+      }
+
+      // Update selectedWithQuestion based on task selection
+      if (selectedTasks[index]) {
+        selectedWithQuestion.add(index);
+      } else {
+        selectedWithQuestion.remove(index);
+      }
+
+      selectedWithQuestion.refresh();
     }
   }
 
@@ -51,7 +81,11 @@ class PageTwoController extends GetxController {
             .map((entry) => entry.value)
             .toList();
 
-    return {'selectedTasks': selectedTaskNames, 'rememberMe': rememberMe};
+    return {
+      'selectedTasks': selectedTaskNames,
+      'rememberMe': rememberMe,
+      'acceptAlcohol': showDrinkQuestion.value ? acceptAlcohol.value : null,
+    };
   }
 
   bool validate({bool showSnackbar = true}) {
@@ -59,9 +93,20 @@ class PageTwoController extends GetxController {
       if (showSnackbar) {
         showInfoSnackbar(message: 'الرجاء اختيار مهمة واحدة على الأقل');
       }
+      if (showDrinkQuestion.value && acceptAlcohol.value == null) {
+        if (showSnackbar) {
+          showInfoSnackbar(message: 'الرجاء تحديد إذا كنت تقبل تقديم الكحول');
+        }
+        return false;
+      }
       return false;
     }
     return true;
+  }
+
+  void setTaskAnswer(int index, bool value) {
+    taskAnswers[index] = value; // Update the answer for the task
+    taskAnswers.refresh(); // Refresh to update the UI
   }
 
   void showSuccessDialog(int index) {
