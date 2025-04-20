@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:get/get.dart';
 import 'package:nas/core/connection_service/app_binding/initial_binding.dart';
 import 'package:nas/core/constant/theme.dart';
@@ -12,7 +13,6 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-
   runApp(const MyApp());
 }
 
@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
           (context, child) => GetMaterialApp(
             debugShowCheckedModeBanner: false,
             transitionDuration: const Duration(milliseconds: 500),
-            defaultTransition: Transition.rightToLeft,
+            defaultTransition: Transition.leftToRight,
             title: 'NAS',
             locale: Locale('ar'), // Default language
             builder: (BuildContext context, Widget? child) {

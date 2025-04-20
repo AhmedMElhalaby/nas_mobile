@@ -65,11 +65,24 @@ class MainHomeController extends GetxController
       );
       drawerAnimationController?.reverse();
     } else {
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
-
       drawerAnimationController?.forward();
+      SystemChrome.setEnabledSystemUIMode(
+        SystemUiMode.immersiveSticky,
+        overlays: [SystemUiOverlay.bottom],
+      ); // إخفاء الجزء العلوي فقط
     }
     isDrawerOpen.value = !isDrawerOpen.value;
+  }
+
+  void closeDrawer() {
+    if (isDrawerOpen.value) {
+      SystemChrome.setEnabledSystemUIMode(
+        SystemUiMode.manual,
+        overlays: [SystemUiOverlay.top, SystemUiOverlay.bottom],
+      );
+      drawerAnimationController?.reverse();
+      isDrawerOpen.value = false;
+    }
   }
 
   // Getter to return the currently selected screen

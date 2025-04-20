@@ -18,13 +18,25 @@ class MainHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final MainHomeController controller = Get.find<MainHomeController>();
     return WillPopScope(
-      onWillPop: () => controller.showBackDialog().then((_) => false),
+      onWillPop: () async {
+        if (controller.selectedIndex.value != 0) {
+          controller.changeIndex(0); // التنقل إلى الصفحة الأولى
+          return Future.value(false); // منع الرجوع للصفحة السابقة
+        }
+
+        if (controller.isDrawerOpen.value) {
+          controller.closeDrawer(); // Close the drawer
+          return Future.value(false); // Prevent the back action
+        } else {
+          // If the drawer is not open, show the back dialog
+          return controller.showkDialog();
+        }
+      },
       child: Stack(
         children: [
           Scaffold(
             backgroundColor: AppTheme.white,
             key: _scaffoldKey, // تعيين المفتاح هنا
-            // backgroundColor: AppTheme.primaryColor,
             appBar: AppBar(
               leading: GestureDetector(
                 onTap: () {

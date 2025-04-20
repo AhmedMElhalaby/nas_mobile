@@ -29,7 +29,7 @@ class PageOne extends StatelessWidget {
                       (source) => CustomRadioButton(
                         title: source,
                         isSelected: controller.selectedSource.value == source,
-                        onTap: () => controller.selectSource(source),
+                        onTap: () => controller.selectSource(source, context),
                       ),
                     )
                     // ignore: unnecessary_to_list_in_spreads

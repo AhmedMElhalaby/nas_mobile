@@ -93,7 +93,7 @@ class PageTwoController extends GetxController {
       if (showSnackbar) {
         showInfoSnackbar(message: 'الرجاء اختيار مهمة واحدة على الأقل');
       }
-      if (showDrinkQuestion.value && acceptAlcohol.value == null) {
+      if (showDrinkQuestion.value && !acceptAlcohol.value) {
         if (showSnackbar) {
           showInfoSnackbar(message: 'الرجاء تحديد إذا كنت تقبل تقديم الكحول');
         }

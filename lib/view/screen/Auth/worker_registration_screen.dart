@@ -23,8 +23,14 @@ class WorkerRegistrationScreen extends StatelessWidget {
         backgroundColor: AppTheme.primaryColor,
         body: GestureDetector(
           onHorizontalDragEnd: (details) {
-            if (details.primaryVelocity! > 0) {
+            double velocity = details.primaryVelocity ?? 0;
+
+            if (velocity.abs() < 200) return; // تجاهل السحب الخفيف
+            if (velocity < 0) {
+              // السحب من اليمين إلى اليسار
               controller.handleSwipeBack();
+            } else {
+              controller.nextPage();
             }
           },
           onTap: () => FocusScope.of(context).unfocus(),

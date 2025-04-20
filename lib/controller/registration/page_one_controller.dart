@@ -26,7 +26,9 @@ class PageOneController extends GetxController {
     });
   }
 
-  void selectSource(String source) {
+  void selectSource(String source, BuildContext context) {
+    FocusScope.of(context).unfocus();
+
     selectedSource.value = source;
     isOtherSelected.value = false;
     otherSourceController

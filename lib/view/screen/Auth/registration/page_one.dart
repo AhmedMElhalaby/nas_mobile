@@ -11,55 +11,60 @@ class PageOne extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      child: Column(
-        mainAxisSize: MainAxisSize.min, // Prevent layout errors
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
 
-        children: [
-          CustomTitle(title: "من وين سمعت عنا ؟"),
+      child: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min, // Prevent layout errors
 
-          SizedBox(height: 20),
-          Obx(
-            () => Column(
-              mainAxisSize: MainAxisSize.min, // هذا يمنع حدوث الأخطاء
+          children: [
+            CustomTitle(title: "من وين سمعت عنا ؟"),
 
-              children: [
-                ...controller.sources
-                    .map(
-                      (source) => CustomRadioButton(
-                        title: source,
-                        isSelected: controller.selectedSource.value == source,
-                        onTap: () => controller.selectSource(source),
+            SizedBox(height: 20),
+            Obx(
+              () => Column(
+                mainAxisSize: MainAxisSize.min, // هذا يمنع حدوث الأخطاء
+
+                children: [
+                  ...controller.sources
+                      .map(
+                        (source) => CustomRadioButton(
+                          title: source,
+                          isSelected: controller.selectedSource.value == source,
+                          onTap: () => controller.selectSource(source, context),
+                        ),
+                      )
+                      // ignore: unnecessary_to_list_in_spreads
+                      .toList(),
+                  SizedBox(height: 8),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: CustomRadioButton(
+                          title: 'أخرى',
+                          isSelected: controller.isOtherSelected.value,
+                          onTap: () => controller.selectOther(),
+                        ),
                       ),
-                    )
-                    // ignore: unnecessary_to_list_in_spreads
-                    .toList(),
-                SizedBox(height: 8),
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Expanded(
-                      flex: 1,
-                      child: CustomRadioButton(
-                        title: 'أخرى',
-                        isSelected: controller.isOtherSelected.value,
-                        onTap: () => controller.selectOther(),
+                      SizedBox(width: 8),
+                      Expanded(
+                        flex: 2,
+                        child: CustomTextField(
+                          focusNode: controller.otherFocusNode,
+                          textEditingController:
+                              controller.otherSourceController,
+                        ),
                       ),
-                    ),
-                    SizedBox(width: 8),
-                    Expanded(
-                      flex: 2,
-                      child: CustomTextField(
-                        focusNode: controller.otherFocusNode,
-                        textEditingController: controller.otherSourceController,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

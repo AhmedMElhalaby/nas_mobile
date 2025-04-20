@@ -5,6 +5,7 @@
    
     <application
         android:label="nas"
+        android:enableOnBackInvokedCallback="true"
         android:name="${applicationName}"
         android:icon="@mipmap/launcher_icon">
         <activity
