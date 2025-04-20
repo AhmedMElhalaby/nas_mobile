@@ -51,6 +51,7 @@ class _TextFormFiledWidgetState extends State<TextFormFiledWidget> {
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Column(
+        mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [_buildCollapsedTextField()],
       ),
@@ -170,7 +171,7 @@ class _TextFormFiledWidgetState extends State<TextFormFiledWidget> {
             AnimatedPositioned(
               duration: const Duration(milliseconds: 300), // مدة التحريك
               curve: Curves.easeInOut, // تأثير سلس للتحريك
-              top: isFocused ? -Get.height * 0.05 : -Get.height * 0.008,
+              top: isFocused ? -Get.height * 0.035 : -Get.height * 0.008,
               right: Get.width * 0.05,
               child: Container(
                 padding: EdgeInsets.symmetric(horizontal: 5),

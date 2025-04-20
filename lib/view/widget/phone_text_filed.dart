@@ -31,7 +31,7 @@ Row phoneTextFiled({
         items: item,
         value: value,
         hint: 'اليوم',
-
+        width: 60,
         onChanged: onChanged,
       ),
     ],

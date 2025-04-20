@@ -60,8 +60,6 @@ class LoginScreen extends StatelessWidget {
                             ),
                       ),
 
-                      SizedBox(height: height * 0.06),
-
                       GetBuilder<LoginController>(
                         builder:
                             (_) => TextFormFiledWidget(
