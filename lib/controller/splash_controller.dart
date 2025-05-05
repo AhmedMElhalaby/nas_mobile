@@ -15,16 +15,8 @@ class SplashController extends GetxController {
   Future<void> _initializeApp() async {
     WidgetsBinding.instance.addPostFrameCallback((_) async {
       try {
-        // تهيئة Firebase
-        await Firebase.initializeApp(
-          options: DefaultFirebaseOptions.currentPlatform,
-        );
 
-        // تهيئة الإشعارات
-        await FCMApi().initNotification();
-
-        // انتظار مؤقت بعد التهيئة
-        await Future.delayed(const Duration(seconds: 2));
+        await Future.delayed(const Duration(seconds: 4));
 
         // الانتقال إلى صفحة تسجيل الدخول
         Get.offAll(() => LoginScreen());

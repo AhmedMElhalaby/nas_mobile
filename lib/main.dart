@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -7,8 +8,18 @@ import 'package:nas/core/connection_service/app_binding/initial_binding.dart';
 import 'package:nas/core/constant/theme.dart';
 import 'package:nas/view/screen/splach_screen.dart';
 
+import 'data/fcm_api.dart';
+import 'firebase_options.dart';
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  // Initialize Firebase first
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+
+
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
@@ -43,7 +54,7 @@ class MyApp extends StatelessWidget {
             theme: AppTheme.appTheme,
             textDirection: TextDirection.rtl,
             initialBinding: InitialBinding(),
-            home: const SplachScreen(), // Replace with your initial screen
+            home: const SplashScreen(), // Replace with your initial screen
           ),
     );
   }

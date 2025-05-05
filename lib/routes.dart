@@ -14,7 +14,7 @@ import 'package:nas/view/screen/main/notification_screen.dart';
 import 'package:nas/view/screen/splach_screen.dart';
 
 Map<String, Widget Function(BuildContext)> routes = {
-  AppRoute.splash: (context) => const SplachScreen(),
+  AppRoute.splash: (context) => const SplashScreen(),
   AppRoute.login: (context) => const LoginScreen(),
   AppRoute.workerRegistration: (context) => const WorkerRegistrationScreen(),
   AppRoute.notification: (context) => const NotificationScreen(),

@@ -1,3 +1,4 @@
+import 'package:firebase_messaging_platform_interface/src/remote_message.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nas/core/constant/theme.dart';
@@ -7,6 +8,7 @@ import 'package:nas/view/screen/main/main_home_screen.dart';
 import 'package:nas/view/widget/button_border.dart';
 import 'package:nas/view/widget/custom_snackbar.dart';
 import 'package:nas/view/widget/primary_button.dart';
+import 'package:nas/data/fcm_api.dart';
 
 import 'worker_registration_controller.dart';
 
@@ -21,20 +23,60 @@ class LoginController extends GetxController {
   final FocusNode passwordFocusNode = FocusNode();
 
   bool rememberMe = false;
-
+  final FCMApi fcmApi = FCMApi(); // Initialize FCMApi instance
+  @override
+  void onInit() {
+    super.onInit();
+    // Initialize FCM when controller is created
+    initializeFCM();
+  }
+  // Initialize FCM
+  Future<void> initializeFCM() async {
+    try {
+      await fcmApi.initNotification();
+      print('FCM initialized successfully');
+    } catch (e) {
+      print('Error initializing FCM: $e');
+    }
+  }
   void toggleRememberMe(bool? value) {
     rememberMe = value ?? false;
     update();
   }
 
   // Login method
-  void login() {
+  void login()async {
     try {
       Get.focusScope!.unfocus(); // Close the keyboard
 
       if (formstate.currentState != null &&
           formstate.currentState!.validate()) {
+
+        // Show loading indicator
+        Get.dialog(
+          Center(child: CircularProgressIndicator()),
+          barrierDismissible: false,
+        );
+
         // Simulate API call or authentication logic
+        await Future.delayed(Duration(seconds: 1)); // Simulating network delay
+
+        // Make sure FCM is initialized and get token
+        final token = await fcmApi.firebaseMessaging.getToken();
+        print('FCM Token: $token');
+
+        // Here you would typically send the token to your backend
+        // await userRepository.updateFcmToken(token);
+
+        // Subscribe to relevant topics based on user role
+        await fcmApi.subscribeToTopic('all_users');
+
+        // If user is in specific groups, subscribe to those topics
+        // Example: await fcmApi.subscribeToTopic('workers');
+
+        // Close loading dialog
+        Get.back();
+
         showSuccessSnackbar();
         print('Login successful');
         Get.offAll(() => MainHomeScreen());
@@ -42,6 +84,9 @@ class LoginController extends GetxController {
         print('Validation failed');
       }
     } catch (e) {
+      if (Get.isDialogOpen ?? false) {
+        Get.back();
+      }
       showErrorSnackbar(message: e.toString());
     }
   }
@@ -67,8 +112,10 @@ class LoginController extends GetxController {
   }
 
   // Need help method
-  void needHelp() {
+  void needHelp() async {
     // Implement help logic
+    await FCMApi().initNotification();
+
     Get.focusScope?.unfocus();
     needHelpDialog();
   }
@@ -219,5 +266,29 @@ class LoginController extends GetxController {
       ),
       barrierDismissible: false,
     );
+  }
+  // Method to send a test notification
+  Future<void> sendTestNotification() async {
+    try {
+      // Create a sample notification for testing
+      final message = {
+        'notification': {
+          'title': 'مرحباً',
+          'body': 'تم تسجيل الدخول بنجاح!'
+        },
+        'data': {
+          'screen': 'home',
+          'item_id': 'welcome'
+        }
+      };
+
+      // Show local notification
+      fcmApi.showTestLocalNotification(  title: 'تنبيه',
+          body: 'هذا إشعار محلي تجريبي!',
+          data: {'screen': 'home', 'item_id': '123'});
+      print('Test notification sent');
+    } catch (e) {
+      print('Error sending test notification: $e');
+    }
   }
 }

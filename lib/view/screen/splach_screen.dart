@@ -4,8 +4,8 @@ import 'package:nas/controller/splash_controller.dart';
 import 'package:nas/core/constant/theme.dart';
 import 'package:nas/core/constant/url.dart';
 
-class SplachScreen extends StatelessWidget {
-  const SplachScreen({super.key});
+class SplashScreen extends StatelessWidget {
+  const SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

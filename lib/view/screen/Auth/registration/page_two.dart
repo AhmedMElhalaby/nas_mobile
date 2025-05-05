@@ -1,10 +1,8 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:nas/controller/registration/page_two_controller.dart';
 import 'package:nas/core/constant/theme.dart';
 import 'package:nas/view/widget/custom_checkbox.dart';
-import 'package:nas/view/widget/custom_radio_button.dart';
 import 'package:nas/view/widget/custom_title.dart';
 
 class PageTwo extends StatelessWidget {

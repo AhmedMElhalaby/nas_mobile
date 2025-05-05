@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:get/get.dart';
 import 'package:nas/controller/login_controller.dart';
 import 'package:nas/core/constant/theme.dart';
@@ -7,6 +8,8 @@ import 'package:nas/view/widget/button_border.dart';
 import 'package:nas/view/widget/custom_checkbox.dart';
 import 'package:nas/view/widget/primary_button.dart';
 import 'package:nas/view/widget/text_form_filed_widget.dart';
+
+import '../../../data/fcm_api.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -150,7 +153,13 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: PrimaryButton(
-                          onTap: controller.login,
+                          onTap:() async {
+                             controller.login();
+                            // Send welcome notification when login is successful
+                            Future.delayed(Duration(seconds: 1), () {
+                              controller.sendTestNotification();
+                            });
+                          },
                           text: "دخول",
                         ),
                       ),
@@ -159,7 +168,10 @@ class LoginScreen extends StatelessWidget {
 
                       Expanded(
                         child: ButtonBorder(
-                          onTap: controller.joinWork,
+                          onTap:(){
+                            testSimpleNotification();
+                          },
+                          // controller.joinWork,
 
                           text: "إنضم للعمل",
                         ),
@@ -189,4 +201,18 @@ class LoginScreen extends StatelessWidget {
       ),
     );
   }
+}
+void testSimpleNotification() {
+  final fcmApi = FCMApi(); // Get the singleton instance
+
+  const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
+    'simple_channel', 'Simple Channel',
+    importance: Importance.max,
+    priority: Priority.high,
+  );
+  const NotificationDetails details = NotificationDetails(android: androidDetails);
+
+  fcmApi.flutterLocalNotificationsPlugin.show(
+      0, 'Simple Title', 'Simple Message', details);
+  print('Simple notification triggered');
 }
