@@ -153,8 +153,8 @@ class LoginScreen extends StatelessWidget {
                     children: [
                       Expanded(
                         child: PrimaryButton(
-                          onTap:() async {
-                             controller.login();
+                          onTap: () async {
+                            controller.login();
                             // Send welcome notification when login is successful
                             Future.delayed(Duration(seconds: 1), () {
                               controller.sendTestNotification();
@@ -168,10 +168,11 @@ class LoginScreen extends StatelessWidget {
 
                       Expanded(
                         child: ButtonBorder(
-                          onTap:(){
-                            testSimpleNotification();
-                          },
-                          // controller.joinWork,
+                          onTap:
+                              // (){
+                              //   testSimpleNotification();
+                              // },
+                              controller.joinWork,
 
                           text: "إنضم للعمل",
                         ),
@@ -202,17 +203,25 @@ class LoginScreen extends StatelessWidget {
     );
   }
 }
+
 void testSimpleNotification() {
   final fcmApi = FCMApi(); // Get the singleton instance
 
   const AndroidNotificationDetails androidDetails = AndroidNotificationDetails(
-    'simple_channel', 'Simple Channel',
+    'simple_channel',
+    'Simple Channel',
     importance: Importance.max,
     priority: Priority.high,
   );
-  const NotificationDetails details = NotificationDetails(android: androidDetails);
+  const NotificationDetails details = NotificationDetails(
+    android: androidDetails,
+  );
 
   fcmApi.flutterLocalNotificationsPlugin.show(
-      0, 'Simple Title', 'Simple Message', details);
+    0,
+    'Simple Title',
+    'Simple Message',
+    details,
+  );
   print('Simple notification triggered');
 }
